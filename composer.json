@@ -1,0 +1,17 @@
+{
+  "name": "bluecode/tinyphp",
+  "description": "A tiny, modular PHP toolkit for requests, forms, uploads and MySQL.",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^8.2",
+    "ext-pdo": "*",
+    "ext-pdo_mysql": "*",
+    "ext-fileinfo": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "TinyPHP\\": "src/"
+    }
+  }
+}
