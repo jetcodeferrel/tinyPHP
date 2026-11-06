@@ -389,6 +389,58 @@ $users = $db->query(
 
 All query values are parameterized through PDO. SQL identifiers are validated by the query builder.
 
+
+### 6. Validations
+
+Here is how the validation module works:
+
+```php
+use TinyPHP\Validation\Validator;
+
+$validator = Validator::make($request->allPost())
+    ->field('name')
+        ->required()
+        ->string()
+        ->min(2)
+        ->max(100)
+    ->end()
+
+    ->field('email')
+        ->required()
+        ->email()
+    ->end()
+
+    ->field('age')
+        ->nullable()
+        ->integer()
+        ->min(18)
+    ->end();
+
+if ($validator->fails()) {
+    $errors = $validator->errors();
+} else {
+    $data = $validator->validated();
+}
+```
+
+## Additional rules includes
+
+- required()
+- nullable()
+- string()
+- integer()
+- numeric()
+- email()
+- url()
+- min()
+- max()
+- in()
+- regex()
+- same()
+
+You can also use validate() to retrieve validated data or throw a ValidationException.
+
+
 ## Project Structure
 
 ```text
@@ -416,8 +468,14 @@ tinyPHP/
 │   │   ├── Request.php
 │   │   └── UploadedFile.php
 │   │
-│   └── Security/
-│       └── Csrf.php
+│   ├── Security/
+│   |       └── Csrf.php
+|   |
+|   └── Validation/
+|        ├── Validator.php
+|        ├── Field.php
+|        └── Exceptions/
+|            └── ValidationException.php
 │
 ├── storage/
 │   └── uploads/
